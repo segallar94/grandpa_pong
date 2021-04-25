@@ -1,5 +1,5 @@
 extends Area2D
-signal hit
+signal hit(angle)
 
 onready var ball = get_parent().get_node("Ball")
 export var SPEED = 250
@@ -26,7 +26,8 @@ func _ready():
 func isColliding():
 	if is_network_master():
 		if Input.is_action_pressed(_hit):
-			emit_signal("hit")
+			var angle = get_global_mouse_position() - global_position
+			emit_signal("hit", angle)
 
 func cartesian_to_isometric(cartesian):
 	return Vector2(cartesian.x - cartesian.y, (cartesian.x + cartesian.y) / 2 )

@@ -1,28 +1,56 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Lobby.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 35
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 41
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 2 )
 
 [node name="Lobby" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="ButtonHost" type="Button" parent="."]
 margin_left = 263.225
-margin_top = 171.226
+margin_top = 231.634
 margin_right = 704.225
-margin_bottom = 221.226
+margin_bottom = 281.634
+custom_fonts/font = SubResource( 1 )
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonHost2" type="Button" parent="."]
+[node name="ButtonJoin" type="Button" parent="."]
 margin_left = 263.997
-margin_top = 296.409
+margin_top = 356.817
 margin_right = 705.997
-margin_bottom = 352.409
+margin_bottom = 412.817
+custom_fonts/font = SubResource( 2 )
 text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ServerAddress" type="LineEdit" parent="."]
+margin_left = 268.0
+margin_top = 123.881
+margin_right = 699.0
+margin_bottom = 175.881
+custom_fonts/font = SubResource( 3 )
+align = 1
+placeholder_text = "Enter IP Address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="ButtonHost" to="." method="_on_ButtonHost_pressed"]
-[connection signal="pressed" from="ButtonHost2" to="." method="_on_ButtonHost2_pressed"]
+[connection signal="pressed" from="ButtonJoin" to="." method="_on_ButtonJoin_pressed"]

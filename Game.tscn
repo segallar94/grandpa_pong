@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Ball.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Game.gd" type="Script" id=7]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://HUD.gd" type="Script" id=9]
+[ext_resource path="res://MyIpAddress.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -39,6 +40,10 @@ extents = Vector2( 397.553, 12.0248 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 374.178, 10.484 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 36
+font_data = ExtResource( 8 )
 
 [node name="Game" type="Node2D"]
 position = Vector2( -80.0904, -16.0181 )
@@ -192,8 +197,30 @@ __meta__ = {
 position = Vector2( -36.7695, -80.6102 )
 rotation = -0.436332
 shape = SubResource( 8 )
+
+[node name="MyIpAddress" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="IpText" type="Label" parent="MyIpAddress"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -581.413
+margin_top = -112.972
+margin_right = 1.5874
+margin_bottom = -53.9717
+custom_fonts/font = SubResource( 9 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="MyIpAddress"]
+
 [connection signal="hit" from="Player1" to="Ball" method="_on_Player1_hit"]
 [connection signal="hit" from="Player2" to="Ball" method="_on_Player2_hit"]
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_Ball_area_entered"]
 [connection signal="area_exited" from="Ball" to="Ball" method="_on_Ball_area_exited"]
 [connection signal="updateScore" from="Ball" to="HUD" method="_on_Ball_updateScore"]
+[connection signal="request_completed" from="MyIpAddress/HTTPRequest" to="MyIpAddress" method="_on_HTTPRequest_request_completed"]
