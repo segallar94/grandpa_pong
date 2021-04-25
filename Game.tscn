@@ -1,0 +1,199 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Ball.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Player.png" type="Texture" id=3]
+[ext_resource path="res://Assets/kisspng-tennis-balls-racket-clip-art-tennis-ball-cliparts-5aaaf99ca63797.3732322315211544606808.png" type="Texture" id=4]
+[ext_resource path="res://Assets/CANCHA 2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/grandpa/Idle Abuelo.png" type="Texture" id=6]
+[ext_resource path="res://Game.gd" type="Script" id=7]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://HUD.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 70
+font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 39.4558, 34.1703 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 18.0108
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 220.241, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 215.195, 15.8934 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 397.553, 12.0248 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 374.178, 10.484 )
+
+[node name="Game" type="Node2D"]
+position = Vector2( -80.0904, -16.0181 )
+script = ExtResource( 7 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+
+[node name="Separator" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -41.0
+margin_right = 41.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 1 )
+text = "-"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreRight" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -446.925
+margin_top = 2.51984
+margin_right = -332.925
+margin_bottom = 88.5198
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLeft" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -163.301
+margin_top = 3.10721
+margin_right = -76.3015
+margin_bottom = 89.1072
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Court" type="Sprite" parent="."]
+position = Vector2( 528.989, 400.505 )
+scale = Vector2( 0.729596, 0.68518 )
+texture = ExtResource( 5 )
+
+[node name="Player1" type="Area2D" parent="."]
+position = Vector2( 357.148, 472.338 )
+z_index = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+shape = SubResource( 2 )
+
+[node name="CollisionTimer" type="Timer" parent="Player1"]
+wait_time = 0.021
+
+[node name="Sprite" type="Sprite" parent="Player1"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 6 )
+hframes = 4
+
+[node name="Player2" type="Area2D" parent="."]
+position = Vector2( 834.67, 276.34 )
+z_index = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player2"]
+self_modulate = Color( 0.116028, 0.928223, 0.269108, 1 )
+frames = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource( 2 )
+
+[node name="CollisionTimer" type="Timer" parent="Player2"]
+wait_time = 0.021
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2( 469.681, 438.77 )
+z_index = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2( 0, -1 )
+shape = SubResource( 4 )
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2( 711.482, 300.241 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2( 191.473, -60.2911 )
+rotation = 0.445059
+shape = SubResource( 5 )
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2( 222.414, 542.847 )
+z_index = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2( 56.2521, 1.91559 )
+rotation = 0.445059
+shape = SubResource( 6 )
+
+[node name="TopWall" type="Area2D" parent="."]
+position = Vector2( 332.127, 244.088 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2( 56.7072, 57.1443 )
+rotation = -0.436332
+shape = SubResource( 7 )
+one_way_collision_margin = 0.0
+
+[node name="BottomWall" type="Area2D" parent="."]
+position = Vector2( 824.339, 561.635 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2( -36.7695, -80.6102 )
+rotation = -0.436332
+shape = SubResource( 8 )
+[connection signal="hit" from="Player1" to="Ball" method="_on_Player1_hit"]
+[connection signal="hit" from="Player2" to="Ball" method="_on_Player2_hit"]
+[connection signal="area_entered" from="Ball" to="Ball" method="_on_Ball_area_entered"]
+[connection signal="area_exited" from="Ball" to="Ball" method="_on_Ball_area_exited"]
+[connection signal="updateScore" from="Ball" to="HUD" method="_on_Ball_updateScore"]
